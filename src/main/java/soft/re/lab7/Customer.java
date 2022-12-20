@@ -31,34 +31,8 @@ public class Customer {
             throw new RuntimeException("Can't extract withdraw " + currency);
         }
 
-        /*calculateMoney(sum, customerType == CustomerType.COMPANY,
-                customerType == CustomerType.COMPANY && account.getType().isPremium());*/
-
-        if (account.getType().isPremium()) {
-            switch (customerType) {
-                case COMPANY:
-                    // we are in overdraft
-                    // 50 percent discount for overdraft for premium account
-                    calculateMoney(sum, true, true);
-                    break;
-                case PERSON:
-                    // we are in overdraft
-                    calculateMoney(sum, false, false);
-                    break;
-            }
-        } else {
-            switch (customerType) {
-                case COMPANY:
-                    // we are in overdraft
-                    // no discount for overdraft for not premium account
-                    calculateMoney(sum, true, false);
-                    break;
-                case PERSON:
-                    // we are in overdraft
-                    calculateMoney(sum, false, false);
-                    break;
-            }
-        }
+        calculateMoney(sum, customerType == CustomerType.COMPANY,
+                customerType == CustomerType.COMPANY && account.getType().isPremium());
     }
 
     private void calculateMoney(double sum, boolean isCompanyDiscount, boolean isCompanyPremiumDiscount) {
