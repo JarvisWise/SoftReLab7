@@ -31,6 +31,9 @@ public class Customer {
             throw new RuntimeException("Can't extract withdraw " + currency);
         }
 
+        /*calculateMoney(sum, customerType == CustomerType.COMPANY,
+                customerType == CustomerType.COMPANY && account.getType().isPremium());*/
+
         if (account.getType().isPremium()) {
             switch (customerType) {
                 case COMPANY:
@@ -64,7 +67,7 @@ public class Customer {
                     (account.getMoney() - sum)
                     - sum * account.overdraftFee()
                     * (isCompanyDiscount ? companyOverdraftDiscount : 1)
-                    * (isCompanyPremiumDiscount ? 2: 1)
+                    / (isCompanyPremiumDiscount ? 2: 1)
             );
         } else {
             account.setMoney(account.getMoney() - sum);
