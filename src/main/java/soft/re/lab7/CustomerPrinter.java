@@ -23,7 +23,6 @@ public class CustomerPrinter {
     }
 
     public String printCustomerAccount() {
-        return "Account: IBAN: " + customer.getAccount().getIban() + ", Money: "
-                + customer.getAccount().getMoney() + ", Account type: " + customer.getAccount().getType();
+        return customer.getAccount().printCustomerAccount();
     }
 }

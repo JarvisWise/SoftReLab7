@@ -14,6 +14,9 @@ public class Account {
 
     private Customer customer;
 
+    public static double PREMIUM_COMPANY_DISCOUNT = 2;
+    public static double NO_DISCOUNT = 1;
+
     public Account(AccountType type, int daysOverdrawn) {
         super();
         this.type = type;
@@ -46,6 +49,24 @@ public class Account {
         }
     }
 
+    public void calculateMoney(double sum, boolean isCompanyDiscount,
+                               boolean isCompanyPremiumDiscount, double companyOverdraftDiscount) {
+        if (getMoney() < 0) {
+            setMoney(
+                    (getMoney() - sum)
+                            - sum * overdraftFee()
+                            * (isCompanyDiscount ? companyOverdraftDiscount : NO_DISCOUNT)
+                            / (isCompanyPremiumDiscount ? PREMIUM_COMPANY_DISCOUNT: NO_DISCOUNT)
+            );
+        } else {
+            setMoney(getMoney() - sum);
+        }
+    }
+
+    public String printCustomerAccount() {
+        return "Account: IBAN: " + getIban() + ", Money: "
+                + getMoney() + ", Account type: " + getType();
+    }
 
     public int getDaysOverdrawn() {
         return daysOverdrawn;

@@ -1,9 +1,11 @@
 package soft.re.lab7;
 
 public class Person extends Customer{
+    private String surname;
 
     public Person(String name, String surname, String email, Account account) {
-        super(name, surname, email, account);
+        super(name, email, account);
+        this.surname = surname;
     }
 
     public void withdraw(double sum, String currency) {
@@ -11,6 +13,12 @@ public class Person extends Customer{
             throw new RuntimeException("Can't extract withdraw " + currency);
         }
 
-        calculateMoney(sum, false, false);
+        getAccount().calculateMoney(sum, false,
+                false, Account.NO_DISCOUNT);
+    }
+
+    @Override
+    public String getSurname() {
+        return surname;
     }
 }
