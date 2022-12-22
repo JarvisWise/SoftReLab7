@@ -14,6 +14,10 @@ public abstract class Customer {
 
     public abstract void withdraw(double sum, String currency);
 
+    public String getFullName() {
+        return getName() + " " + getSurname() + " ";
+    }
+
     public String getName() {
         return name;
     }
