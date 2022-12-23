@@ -14,7 +14,7 @@ public class Company extends Customer {
         }
 
         getAccount().calculateMoney(sum, true,
-                getAccount().getType().isPremium(), companyOverdraftDiscount);
+                getAccount().isPremium(), companyOverdraftDiscount);
     }
 
     @Override

@@ -4,11 +4,11 @@ public class Account {
 
     private String iban;
 
-    private AccountType type;
+    private boolean isPremium;
 
     private int daysOverdrawn;
 
-    private double money;
+    private Money money;
 
     private String currency;
 
@@ -17,9 +17,10 @@ public class Account {
     public static double PREMIUM_COMPANY_DISCOUNT = 2;
     public static double NO_DISCOUNT = 1;
 
-    public Account(AccountType type, int daysOverdrawn) {
+    public Account(boolean isPremium, int daysOverdrawn) {
         super();
-        this.type = type;
+        this.money =  new Money();
+        this.isPremium = isPremium;
         this.daysOverdrawn = daysOverdrawn;
     }
 
@@ -32,7 +33,7 @@ public class Account {
     }
 
     private double overdraftCharge() {
-        if (type.isPremium()) {
+        if (isPremium) {
             double result = 10;
             if (getDaysOverdrawn() > 7)
                 result += (getDaysOverdrawn() - 7) * 1.0;
@@ -42,7 +43,7 @@ public class Account {
     }
 
     public double overdraftFee() {
-        if (type.isPremium()) {
+        if (isPremium) {
             return 0.10;
         } else {
             return 0.20;
@@ -65,7 +66,7 @@ public class Account {
 
     public String printCustomerAccount() {
         return "Account: IBAN: " + getIban() + ", Money: "
-                + getMoney() + ", Account type: " + getType();
+                + getMoney() + ", Account type: " + (isPremium ? "premium" : "normal");
     }
 
     public String printCustomerDaysOverdrawn() {
@@ -86,11 +87,11 @@ public class Account {
     }
 
     public void setMoney(double money) {
-        this.money = money;
+        this.money.setMoney(money);
     }
 
     public double getMoney() {
-        return money;
+        return money.getMoney();
     }
 
     public Customer getCustomer() {
@@ -101,8 +102,8 @@ public class Account {
         this.customer = customer;
     }
 
-    public AccountType getType() {
-        return type;
+    public boolean isPremium() {
+        return isPremium;
     }
 
     public String getCurrency() {
