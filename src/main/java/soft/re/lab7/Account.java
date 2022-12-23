@@ -10,8 +10,6 @@ public class Account {
 
     private Money money;
 
-    private String currency;
-
     private Customer customer;
 
     public static double PREMIUM_COMPANY_DISCOUNT = 2;
@@ -107,10 +105,10 @@ public class Account {
     }
 
     public String getCurrency() {
-        return currency;
+        return this.money.getCurrency();
     }
 
     public void setCurrency(String currency) {
-        this.currency = currency;
+        this.money.setCurrency(currency);
     }
 }
